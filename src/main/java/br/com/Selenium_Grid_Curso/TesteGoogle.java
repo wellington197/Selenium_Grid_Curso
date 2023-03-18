@@ -28,7 +28,7 @@ public class TesteGoogle {
 
 
 		//Abre a tela de acordo com essa dimensão
-		driver.manage().window().setSize(new Dimension(1200,765));
+		driver.manage().window().setSize(new Dimension(1250,765));
 
 		//Acesso ao site
 		driver.get("http://www.google.com");
