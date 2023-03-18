@@ -15,7 +15,7 @@ public class TesteGoogle {
 		
 		WebDriver driver=new FirefoxDriver(); //instanciar o driver
 		
-		driver.get("http://www.google.com");
+		driver.get("http://www.google.com.br");
 		
 		System.out.println(driver.getTitle());
 		
