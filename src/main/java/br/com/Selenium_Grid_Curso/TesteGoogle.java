@@ -12,12 +12,16 @@ public class TesteGoogle {
 		
 		//Caso não tenha configurado nas variáveis de ambiente, terá de colocar o caminho
 		//System.setProperty("webdriver.gecko.driver", "/xampp/htdocs/CURSOS_WELLINGTON/CURSOS_UDEMY/Drivers/geckodriver.exe");
-		
+
+
+		/*-----Prepara Cenário necessário para executar os testes-----*/
 		WebDriver driver=new FirefoxDriver(); //instanciar o driver
-		
 		driver.get("http://www.google.com");
 		
-		System.out.println(driver.getTitle());
+		//System.out.println(driver.getTitle());
+
+		/*--------Verificação--------*/
+		Assert.assertEquals("google",driver.getTitle());
 		
 		
 	}
