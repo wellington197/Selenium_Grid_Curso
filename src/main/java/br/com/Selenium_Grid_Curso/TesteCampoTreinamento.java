@@ -5,7 +5,11 @@ import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.Select;
+
+import java.awt.*;
 
 public class TesteCampoTreinamento {
     @Test
@@ -41,7 +45,7 @@ public class TesteCampoTreinamento {
         //Assert.assertEquals("Google",driver.getTitle());
 
         //fechar browser ap&oacute;s os testes
-        driver.quit();
+        //driver.quit();
     }
 
     @Test
@@ -69,4 +73,8 @@ public class TesteCampoTreinamento {
     }
 
 
-}
+        //driver.quit();//fechar browser ap&oacute;s os testes
+    }
+
+
+} //Fim
