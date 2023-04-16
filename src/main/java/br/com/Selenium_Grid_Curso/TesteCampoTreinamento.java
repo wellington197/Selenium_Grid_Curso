@@ -74,7 +74,32 @@ public class TesteCampoTreinamento {
 
 
         //driver.quit();//fechar browser ap&oacute;s os testes
+
+    public void InteracaoComTextAreaField() {
+        /*-----PREPARAÇÃO-----*/
+
+        //Instanciar o driver
+        WebDriver driver=new FirefoxDriver(); //instanciar o driver do FIREFOX
+        //Abre a tela de acordo com essa dimensão
+        driver.manage().window().setSize(new Dimension(1250,765));
+        // Usa um caminho dinâmico, onde busca software pela pasta raiz do projeto
+        driver.get("file:///"+System.getProperty("user.dir")+"/src/main/resources/componentes.html");
+
+        /*--------EXECUÇÃO--------*/
+
+        //Interagindo com campo de tipo texto
+        driver.findElement(By.id("elementosForm:sugestoes")).sendKeys("Teste de inserção de texto\n\nTeste de pular linha no campo");
+
+
+        /*--------VERIFICAÇÃO--------*/
+        Assert.assertEquals("Teste de inserção de texto\n\nTeste de pular linha no campo", driver.findElement(By.id("elementosForm:sugestoes")).getAttribute("value"));
+
+        //fechar browser ap&oacute;s os testes
+        //driver.quit();
     }
 
 
-} //Fim
+    //driver.quit();//fechar browser ap&oacute;s os testes
+
+
+} //Fim da classe teste de campo de treinamento
