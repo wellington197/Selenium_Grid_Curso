@@ -49,15 +49,11 @@ public class TesteCampoTreinamento {
     }
 
     @Test
-    public void InteracaoComTextAreaField() {
+    public void InteracaoComTextArea() {
         /*-----PREPARAÇÃO-----*/
-
-        //Instanciar o driver
         WebDriver driver=new FirefoxDriver(); //instanciar o driver do FIREFOX
-        //Abre a tela de acordo com essa dimensão
-        driver.manage().window().setSize(new Dimension(1250,765));
-        // Usa um caminho dinâmico, onde busca software pela pasta raiz do projeto
-        driver.get("file:///"+System.getProperty("user.dir")+"/src/main/resources/componentes.html");
+        driver.manage().window().setSize(new Dimension(1250,765));//Abre a tela de acordo com essa dimensão
+        driver.get("file:///"+System.getProperty("user.dir")+"/src/main/resources/componentes.html");// Usa um caminho dinâmico, onde busca software pela pasta raiz do projeto
 
         /*--------EXECUÇÃO--------*/
 
@@ -73,33 +69,43 @@ public class TesteCampoTreinamento {
     }
 
 
-        //driver.quit();//fechar browser ap&oacute;s os testes
-
-    public void InteracaoComTextAreaField() {
+    @Test
+    public void DeveInteragirComRadioButton() {
         /*-----PREPARAÇÃO-----*/
-
-        //Instanciar o driver
         WebDriver driver=new FirefoxDriver(); //instanciar o driver do FIREFOX
-        //Abre a tela de acordo com essa dimensão
-        driver.manage().window().setSize(new Dimension(1250,765));
-        // Usa um caminho dinâmico, onde busca software pela pasta raiz do projeto
-        driver.get("file:///"+System.getProperty("user.dir")+"/src/main/resources/componentes.html");
+        driver.manage().window().setSize(new Dimension(1250,765));//Abre a tela de acordo com essa dimensão
+        driver.get("file:///"+System.getProperty("user.dir")+"/src/main/resources/componentes.html");// Usa um caminho dinâmico, onde busca software pela pasta raiz do projeto
 
         /*--------EXECUÇÃO--------*/
 
         //Interagindo com campo de tipo texto
-        driver.findElement(By.id("elementosForm:sugestoes")).sendKeys("Teste de inserção de texto\n\nTeste de pular linha no campo");
+        driver.findElement(By.id("elementosForm:sexo:0")).click(); // Faz o clique no Radio Button
 
 
         /*--------VERIFICAÇÃO--------*/
-        Assert.assertEquals("Teste de inserção de texto\n\nTeste de pular linha no campo", driver.findElement(By.id("elementosForm:sugestoes")).getAttribute("value"));
+        Assert.assertTrue(driver.findElement(By.id("elementosForm:sexo:0")).isSelected()); //Verifica se está selecionado
 
         //fechar browser ap&oacute;s os testes
         //driver.quit();
     }
+    @Test
+    public void DeveInteragirComCheckBox() {
+        /*-----PREPARAÇÃO-----*/
+        WebDriver driver=new FirefoxDriver(); //instanciar o driver do FIREFOX
+        driver.manage().window().setSize(new Dimension(1250,765));//Abre a tela de acordo com essa dimensão
+        driver.get("file:///"+System.getProperty("user.dir")+"/src/main/resources/componentes.html");// Usa um caminho dinâmico, onde busca software pela pasta raiz do projeto
+
+        /*--------EXECUÇÃO--------*/
+
+        //Interagindo com campo de tipo texto
+        driver.findElement(By.id("elementosForm:comidaFavorita:2")).click(); // Faz o clique no Radio Button
 
 
-    //driver.quit();//fechar browser ap&oacute;s os testes
+        /*--------VERIFICAÇÃO--------*/
+        Assert.assertTrue(driver.findElement(By.id("elementosForm:comidaFavorita:2")).isSelected()); //Verifica se está selecionado
 
+        //fechar browser ap&oacute;s os testes
+        //driver.quit();
+    }
 
 } //Fim da classe teste de campo de treinamento
