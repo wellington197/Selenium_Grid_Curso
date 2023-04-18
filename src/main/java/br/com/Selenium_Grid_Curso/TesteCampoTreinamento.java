@@ -10,6 +10,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import java.awt.*;
+import java.util.List;
 
 public class TesteCampoTreinamento {
     @Test
@@ -98,9 +99,9 @@ public class TesteCampoTreinamento {
         WebElement element = driver.findElement(By.id("elementosForm:escolaridade"));
         Select combo = new Select(element); //Seleciono um elemento
 
-        //combo.selectByIndex(3); //Seleciona o elemento 3
+        combo.selectByIndex(5); //Seleciona o elemento 3
         //combo.selectByValue("superior"); // Seleciona pelo valor
-        combo.selectByVisibleText("Superior"); // (IDEAL) Valida se valor do campo é mesmo que usuário visualiza
+        //combo.selectByVisibleText("Superior"); // (IDEAL) Valida se valor do campo é mesmo que usuário visualiza
 
 
         /*--------VERIFICAÇÃO--------*/
@@ -111,7 +112,7 @@ public class TesteCampoTreinamento {
     }
 
     @Test
-    public void DeveVerificarValoresComboBox() {
+    public void DeveVerificarValoresCombo() {
         /*-----PREPARAÇÃO-----*/
         WebDriver driver = new FirefoxDriver(); //instanciar o driver do FIREFOX
         driver.manage().window().setSize(new Dimension(1250, 765));//Abre a tela de acordo com essa dimensão
@@ -124,12 +125,19 @@ public class TesteCampoTreinamento {
         Select combo = new Select(element); //Seleciono um elemento
 
         //cria uma lista
-        List<WebElement> options = combo.getOptions();
+        List<WebElement> options = combo.getOptions(); //Todas as opções para aquele select
 
-        Assert.assertEquals(8,options.size());
+        Assert.assertEquals(8,options.size()); //Verifica o tamanho das opções
 
+        boolean encontrou=false;
 
-
+        for(WebElement option: options){
+            if (option.getText().equals("Mestrado")){
+                encontrou=true;
+                break;
+            }
+        }
+        Assert.assertTrue(encontrou);
 
     }// Fim da DeveVerificarValoresComboBox
 
