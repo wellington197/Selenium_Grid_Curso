@@ -10,6 +10,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.Select;
 
 import java.awt.*;
+import java.util.List;
 
 public class TesteCampoTreinamento {
     @Test
@@ -47,7 +48,6 @@ public class TesteCampoTreinamento {
         //fechar browser ap&oacute;s os testes
         //driver.quit();
     }
-
     @Test
     public void InteracaoComTextArea() {
         /*-----PREPARAÇÃO-----*/
@@ -67,8 +67,6 @@ public class TesteCampoTreinamento {
         //fechar browser ap&oacute;s os testes
         //driver.quit();
     }
-
-
     @Test
     public void DeveInteragirComRadioButton() {
         /*-----PREPARAÇÃO-----*/
@@ -89,7 +87,7 @@ public class TesteCampoTreinamento {
         //driver.quit();
     }
     @Test
-    public void DeveInteragirComCheckBox() {
+    public void DeveInteragirComComboBox() {
         /*-----PREPARAÇÃO-----*/
         WebDriver driver=new FirefoxDriver(); //instanciar o driver do FIREFOX
         driver.manage().window().setSize(new Dimension(1250,765));//Abre a tela de acordo com essa dimensão
@@ -97,15 +95,50 @@ public class TesteCampoTreinamento {
 
         /*--------EXECUÇÃO--------*/
 
-        //Interagindo com campo de tipo texto
-        driver.findElement(By.id("elementosForm:comidaFavorita:2")).click(); // Faz o clique no Radio Button
+        //Buscar os elementos
+        WebElement element = driver.findElement(By.id("elementosForm:escolaridade"));
+        Select combo = new Select(element); //Seleciono um elemento
+
+        combo.selectByIndex(5); //Seleciona o elemento 3
+        //combo.selectByValue("superior"); // Seleciona pelo valor
+        //combo.selectByVisibleText("Superior"); // (IDEAL) Valida se valor do campo é mesmo que usuário visualiza
 
 
         /*--------VERIFICAÇÃO--------*/
-        Assert.assertTrue(driver.findElement(By.id("elementosForm:comidaFavorita:2")).isSelected()); //Verifica se está selecionado
+        Assert.assertEquals("Superior",combo.getFirstSelectedOption().getText());
 
-        //fechar browser ap&oacute;s os testes
-        //driver.quit();
+
+        //driver.quit(); //fechar browser ap&oacute;s os testes
     }
+
+    @Test
+    public void DeveVerificarValoresCombo() {
+        /*-----PREPARAÇÃO-----*/
+        WebDriver driver = new FirefoxDriver(); //instanciar o driver do FIREFOX
+        driver.manage().window().setSize(new Dimension(1250, 765));//Abre a tela de acordo com essa dimensão
+        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");// Usa um caminho dinâmico, onde busca software pela pasta raiz do projeto
+
+        /*--------EXECUÇÃO--------*/
+
+        //Buscar os elementos
+        WebElement element = driver.findElement(By.id("elementosForm:escolaridade"));
+        Select combo = new Select(element); //Seleciono um elemento
+
+        //cria uma lista
+        List<WebElement> options = combo.getOptions(); //Todas as opções para aquele select
+
+        Assert.assertEquals(8,options.size()); //Verifica o tamanho das opções
+
+        boolean encontrou=false;
+
+        for(WebElement option: options){
+            if (option.getText().equals("Mestrado")){
+                encontrou=true;
+                break;
+            }
+        }
+        Assert.assertTrue(encontrou);
+
+    }// Fim da DeveVerificarValoresComboBox
 
 } //Fim da classe teste de campo de treinamento
