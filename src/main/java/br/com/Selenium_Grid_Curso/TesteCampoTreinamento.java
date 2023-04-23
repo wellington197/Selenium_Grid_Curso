@@ -99,8 +99,8 @@ public class TesteCampoTreinamento {
         WebElement element = driver.findElement(By.id("elementosForm:escolaridade"));
         Select combo = new Select(element); //Seleciono um elemento
 
-        combo.selectByIndex(5); //Seleciona o elemento 3
-        //combo.selectByValue("superior"); // Seleciona pelo valor
+        //combo.selectByIndex(5); //Seleciona o elemento 3
+        combo.selectByValue("superior"); // Seleciona pelo valor
         //combo.selectByVisibleText("Superior"); // (IDEAL) Valida se valor do campo é mesmo que usuário visualiza
 
 
@@ -140,5 +140,57 @@ public class TesteCampoTreinamento {
         Assert.assertTrue(encontrou);
 
     }// Fim da DeveVerificarValoresComboBox
+    @Test
+    public void DeveVerificarValoresComboMultiplo() {
+        /*-----PREPARAÇÃO-----*/
+        WebDriver driver = new FirefoxDriver(); //instanciar o driver do FIREFOX
+        driver.manage().window().setSize(new Dimension(1250, 765));//Abre a tela de acordo com essa dimensão
+        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");// Usa um caminho dinâmico, onde busca software pela pasta raiz do projeto
+
+        /*--------EXECUÇÃO--------*/
+
+        //Buscar os elementos
+        WebElement element = driver.findElement(By.id("elementosForm:esportes"));
+        Select combo = new Select(element); //Seleciono um elemento
+
+        combo.selectByVisibleText("Natacao");
+        combo.selectByVisibleText("Corrida");
+        combo.selectByVisibleText("O que eh esporte?");
+
+
+        /*--------ASSERT--------*/
+
+        List<WebElement> allSelectedOptions = combo.getAllSelectedOptions();
+        Assert.assertEquals(3,allSelectedOptions.size()); // valida se foi selecionado os 3 itens do combo
+
+
+        /*--------ASSERT--------*/ //Ao desmarcar um item
+        combo.deselectByVisibleText("Corrida");
+        allSelectedOptions = combo.getAllSelectedOptions();
+        Assert.assertEquals(2,allSelectedOptions.size()); // valida se foi selecionado os 2 itens do combo
+
+        }
+
+    @Test
+    public void deveInteragirComBotoes() {
+        /*-----PREPARAÇÃO-----*/
+        WebDriver driver = new FirefoxDriver(); //instanciar o driver do FIREFOX
+        driver.manage().window().setSize(new Dimension(1250, 765));//Abre a tela de acordo com essa dimensão
+        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");// Usa um caminho dinâmico, onde busca software pela pasta raiz do projeto
+
+        WebElement botao= driver.findElement(By.id("buttonSimple"));
+
+        botao.click();
+        Assert.assertEquals("Obrigado!",botao.getAttribute("value"));
+
+
+    }
+
+
+
+
+
+
+
 
 } //Fim da classe teste de campo de treinamento
