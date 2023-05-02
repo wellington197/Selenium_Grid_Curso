@@ -1,6 +1,7 @@
 package br.com.Selenium_Grid_Curso;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
@@ -182,6 +183,18 @@ public class TesteCampoTreinamento {
 
         botao.click();
         Assert.assertEquals("Obrigado!",botao.getAttribute("value"));
+
+
+    }
+    @Test
+    @Ignore //Não execute assert
+    public void deveInteragirComLinks() {
+        /*-----PREPARAÇÃO-----*/
+        WebDriver driver = new FirefoxDriver(); //instanciar o driver do FIREFOX
+        driver.manage().window().setSize(new Dimension(1250, 765));//Abre a tela de acordo com essa dimensão
+        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");// Usa um caminho dinâmico, onde busca software pela pasta raiz do projeto
+
+       driver.findElement(By.linkText("Voltar")).click();
 
 
     }
