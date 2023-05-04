@@ -196,13 +196,29 @@ public class TesteCampoTreinamento {
 
        driver.findElement(By.linkText("Voltar")).click();
 
-
+       Assert.assertEquals("Voltou!",driver.findElement(By.id("resultado")).getText());
     }
 
+    @Test
+    public void deveBuscarTextoNaPágina() {
+        /*-----PREPARAÇÃO-----*/
+        WebDriver driver = new FirefoxDriver(); //instanciar o driver do FIREFOX
+        driver.manage().window().setSize(new Dimension(1250, 765));//Abre a tela de acordo com essa dimensão
+        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");// Usa um caminho dinâmico, onde busca software pela pasta raiz do projeto
+
+        /**Opção tipo true para campo de texto não é ideal. Pois ela seleciona a primeira que aparecer*/
+        //Assert.assertTrue(driver.findElement(By.tagName("body"))
+            // .getText().contains("Campo de treinamentos"));
 
 
+        /**Buscando pela Tag H3*/
+        Assert.assertEquals("Campo de Treinamento",driver.findElement(By.tagName("h3"))
+                .getText());
 
-
+        /**Buscando pela class o span*/
+        Assert.assertEquals("Cuidado onde clica, muitas armadilhas...",driver.findElement(By.className("facilAchar"))
+                .getText());
+    }
 
 
 
