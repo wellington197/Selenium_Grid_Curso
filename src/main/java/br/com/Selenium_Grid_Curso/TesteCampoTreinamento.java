@@ -14,6 +14,8 @@ import java.awt.*;
 import java.util.List;
 
 public class TesteCampoTreinamento {
+
+
     @Test
     public void testeTextField() {
 
@@ -219,7 +221,6 @@ public class TesteCampoTreinamento {
         Assert.assertEquals("Cuidado onde clica, muitas armadilhas...",driver.findElement(By.className("facilAchar"))
                 .getText());
     }
-
 
 
 } //Fim da classe teste de campo de treinamento
