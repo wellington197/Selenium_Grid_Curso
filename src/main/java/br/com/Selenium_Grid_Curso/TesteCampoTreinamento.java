@@ -14,6 +14,8 @@ import java.awt.*;
 import java.util.List;
 
 public class TesteCampoTreinamento {
+
+
     @Test
     public void testeTextField() {
 
@@ -28,7 +30,6 @@ public class TesteCampoTreinamento {
         //WebDriver driver=new ChromeDriver(); //instanciar o driver do CHROME
         //WebDriver driver=new EdgeDriver(); //instanciar o driver do EDGE
         //WebDriver driver=new InternetExplorerDriver(); //instanciar o driver do IE
-
 
         //Abre a tela de acordo com essa dimensão
         driver.manage().window().setSize(new Dimension(1250,765));
@@ -219,7 +220,6 @@ public class TesteCampoTreinamento {
         Assert.assertEquals("Cuidado onde clica, muitas armadilhas...",driver.findElement(By.className("facilAchar"))
                 .getText());
     }
-
 
 
 } //Fim da classe teste de campo de treinamento
