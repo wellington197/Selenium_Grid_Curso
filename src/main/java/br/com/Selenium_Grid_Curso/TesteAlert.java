@@ -62,8 +62,9 @@ public class TesteAlert {
 
         //Aceita alerta para fechar modal
         alert.dismiss();
-        Assert.assertEquals("Negado", alerta.getText());
-        alert.dismiss();
+        String msg=alert.getText();
+        Assert.assertEquals("Negado", msg);
+        alert.accept();
         driver.quit();
 
 

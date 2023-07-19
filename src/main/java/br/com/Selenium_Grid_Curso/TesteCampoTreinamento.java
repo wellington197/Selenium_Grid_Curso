@@ -67,7 +67,7 @@ public class TesteCampoTreinamento {
         Assert.assertEquals("Teste de inserção de texto\n\nTeste de pular linha no campo", driver.findElement(By.id("elementosForm:sugestoes")).getAttribute("value"));
 
         //fechar browser ap&oacute;s os testes
-        //driver.quit();
+        driver.quit();
     }
     @Test
     public void DeveInteragirComRadioButton() {
@@ -86,7 +86,7 @@ public class TesteCampoTreinamento {
         Assert.assertTrue(driver.findElement(By.id("elementosForm:sexo:0")).isSelected()); //Verifica se está selecionado
 
         //fechar browser ap&oacute;s os testes
-        //driver.quit();
+        driver.quit();
     }
     @Test
     public void DeveInteragirComComboBox() {
@@ -110,7 +110,7 @@ public class TesteCampoTreinamento {
         Assert.assertEquals("Superior",combo.getFirstSelectedOption().getText());
 
 
-        //driver.quit(); //fechar browser ap&oacute;s os testes
+        driver.quit(); //fechar browser ap&oacute;s os testes
     }
 
     @Test
@@ -141,6 +141,9 @@ public class TesteCampoTreinamento {
         }
         Assert.assertTrue(encontrou);
 
+        driver.quit();
+
+
     }// Fim da DeveVerificarValoresComboBox
     @Test
     public void DeveVerificarValoresComboMultiplo() {
@@ -170,8 +173,9 @@ public class TesteCampoTreinamento {
         combo.deselectByVisibleText("Corrida");
         allSelectedOptions = combo.getAllSelectedOptions();
         Assert.assertEquals(2,allSelectedOptions.size()); // valida se foi selecionado os 2 itens do combo
+        driver.quit();
 
-        }
+    }
 
     @Test
     public void deveInteragirComBotoes() {
@@ -184,6 +188,9 @@ public class TesteCampoTreinamento {
 
         botao.click();
         Assert.assertEquals("Obrigado!",botao.getAttribute("value"));
+
+        driver.quit();
+
 
 
     }
@@ -198,6 +205,9 @@ public class TesteCampoTreinamento {
        driver.findElement(By.linkText("Voltar")).click();
 
        Assert.assertEquals("Voltou!",driver.findElement(By.id("resultado")).getText());
+
+        driver.quit();
+
     }
 
     @Test
@@ -219,6 +229,9 @@ public class TesteCampoTreinamento {
         /**Buscando pela class o span*/
         Assert.assertEquals("Cuidado onde clica, muitas armadilhas...",driver.findElement(By.className("facilAchar"))
                 .getText());
+
+        driver.quit();
+
     }
 
 

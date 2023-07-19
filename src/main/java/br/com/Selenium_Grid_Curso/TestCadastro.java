@@ -1,4 +1,4 @@
-package br.com.Selenium_Grid_Curso;
+/*package br.com.Selenium_Grid_Curso;
 
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
