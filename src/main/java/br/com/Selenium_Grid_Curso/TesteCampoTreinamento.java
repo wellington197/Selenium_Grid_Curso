@@ -48,7 +48,7 @@ public class TesteCampoTreinamento {
         //Assert.assertEquals("Google",driver.getTitle());
 
         //fechar browser ap&oacute;s os testes
-        //driver.quit();
+        driver.quit();
     }
     @Test
     public void InteracaoComTextArea() {

@@ -21,9 +21,9 @@ public class TesteAlert {
         driver.findElement(By.id("alert")).click();
 
         //Alert fica externo a página. Pedir selenium para trocar foco para alerta
-        Alert alert=driver.switchTo().alert();
-        String texto=alert.getText();
-        Assert.assertEquals("Alert Simples",texto);
+        Alert alert = driver.switchTo().alert();
+        String texto = alert.getText();
+        Assert.assertEquals("Alert Simples", texto);
 
         //Aceita alerta para fechar modal
         alert.accept();
@@ -34,6 +34,7 @@ public class TesteAlert {
 
 
     }
+
     @Test
     public void deveInteragirComAlertConfirma() {
         /*-----PREPARAÇÃO-----*/
@@ -45,35 +46,28 @@ public class TesteAlert {
         driver.findElement(By.id("confirm")).click();
 
         //Alert fica externo a página. Pedir selenium para trocar foco para alerta
-        Alert alert=driver.switchTo().alert();
-        Assert.assertEquals("Confirm Simples",alert.getText());
+        Alert alert = driver.switchTo().alert();
+        Assert.assertEquals("Confirm Simples", alert.getText());
 
         //Aceita alerta para fechar modal
         alert.accept();
-        Assert.assertEquals("Confirmado",alert.getText());
+        Assert.assertEquals("Confirmado", alert.getText());
         alert.accept();
-
-
-
-
-
 
 
         driver.findElement(By.id("confirm")).click();
         //Alert fica externo a página. Pedir selenium para trocar foco para alerta
         Alert alerta = driver.switchTo().alert();
-        Assert.assertEquals("Confirm Simples",alerta.getText());
+        Assert.assertEquals("Confirm Simples", alerta.getText());
 
         //Aceita alerta para fechar modal
         alert.dismiss();
-        Assert.assertEquals("Negado",alerta.getText());
+        Assert.assertEquals("Negado", alerta.getText());
         alert.dismiss();
         driver.quit();
 
 
-
     }
-
 
 
     @Test
@@ -86,5 +80,9 @@ public class TesteAlert {
 
         driver.findElement(By.id("confirm")).click();
 
+        driver.quit();
 
+
+
+    }
 }
