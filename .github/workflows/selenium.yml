@@ -27,12 +27,4 @@ jobs:
 
     - name: Build com Maven
     
-    - name: JUnit Test Reporter
-      if: always()  # Executar mesmo se os testes falharem
-      uses: mikepenz/junit-test-reporter@v2
-      with:
-        # Seus relatórios de testes normalmente são gerados em algum diretório, especifique o caminho aqui:
-        reportDir: target/surefire-reports
-
-
-      run: mvn clean test
+  
