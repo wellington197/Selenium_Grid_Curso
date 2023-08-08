@@ -1,8 +1,6 @@
 package br.com.Selenium_Grid_Curso;
 
-import org.junit.Assert;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.*;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
@@ -15,9 +13,12 @@ import java.util.List;
 
 public class TesteCampoTreinamento {
 
+    /**Instanciando uma variável global*/
+    private WebDriver driver;
 
-    @Test
-    public void testeTextField() {
+
+    @Before
+    public void inicializa(){
 
         //Caso não tenha configurado nas variáveis de ambiente, terá de colocar o caminho
         //System.setProperty("webdriver.gecko.driver", "/xampp/htdocs/CURSOS_WELLINGTON/CURSOS_UDEMY/Drivers/geckodriver.exe");
@@ -26,7 +27,7 @@ public class TesteCampoTreinamento {
         /*-----Prepara Cenário necessário para executar os testes-----*/
 
         /*INSTANCIAR OS DRIVERS*/
-        WebDriver driver=new FirefoxDriver(); //instanciar o driver do FIREFOX
+        driver=new FirefoxDriver(); //instanciar o driver do FIREFOX
         //WebDriver driver=new ChromeDriver(); //instanciar o driver do CHROME
         //WebDriver driver=new EdgeDriver(); //instanciar o driver do EDGE
         //WebDriver driver=new InternetExplorerDriver(); //instanciar o driver do IE
@@ -39,6 +40,17 @@ public class TesteCampoTreinamento {
         driver.get("file:///"+System.getProperty("user.dir")+"/src/main/resources/componentes.html");
         //System.out.println(driver.getTitle());
 
+    }
+
+
+    @After
+    public void finalizar(){
+        driver.quit();
+    }
+
+    @Test
+    public void testeTextField() {
+
 
         //Interagindo com campo de tipo texto
         driver.findElement(By.id("elementosForm:sobrenome")).sendKeys("Teste de inserção de texto");
@@ -48,14 +60,10 @@ public class TesteCampoTreinamento {
         //Assert.assertEquals("Google",driver.getTitle());
 
         //fechar browser ap&oacute;s os testes
-        driver.quit();
+        //driver.quit();
     }
     @Test
     public void InteracaoComTextArea() {
-        /*-----PREPARAÇÃO-----*/
-        WebDriver driver=new FirefoxDriver(); //instanciar o driver do FIREFOX
-        driver.manage().window().setSize(new Dimension(1250,765));//Abre a tela de acordo com essa dimensão
-        driver.get("file:///"+System.getProperty("user.dir")+"/src/main/resources/componentes.html");// Usa um caminho dinâmico, onde busca software pela pasta raiz do projeto
 
         /*--------EXECUÇÃO--------*/
 
@@ -67,14 +75,10 @@ public class TesteCampoTreinamento {
         Assert.assertEquals("Teste de inserção de texto\n\nTeste de pular linha no campo", driver.findElement(By.id("elementosForm:sugestoes")).getAttribute("value"));
 
         //fechar browser ap&oacute;s os testes
-        driver.quit();
+        //driver.quit();
     }
     @Test
     public void DeveInteragirComRadioButton() {
-        /*-----PREPARAÇÃO-----*/
-        WebDriver driver=new FirefoxDriver(); //instanciar o driver do FIREFOX
-        driver.manage().window().setSize(new Dimension(1250,765));//Abre a tela de acordo com essa dimensão
-        driver.get("file:///"+System.getProperty("user.dir")+"/src/main/resources/componentes.html");// Usa um caminho dinâmico, onde busca software pela pasta raiz do projeto
 
         /*--------EXECUÇÃO--------*/
 
@@ -86,14 +90,10 @@ public class TesteCampoTreinamento {
         Assert.assertTrue(driver.findElement(By.id("elementosForm:sexo:0")).isSelected()); //Verifica se está selecionado
 
         //fechar browser ap&oacute;s os testes
-        driver.quit();
+        //driver.quit();
     }
     @Test
     public void DeveInteragirComComboBox() {
-        /*-----PREPARAÇÃO-----*/
-        WebDriver driver=new FirefoxDriver(); //instanciar o driver do FIREFOX
-        driver.manage().window().setSize(new Dimension(1250,765));//Abre a tela de acordo com essa dimensão
-        driver.get("file:///"+System.getProperty("user.dir")+"/src/main/resources/componentes.html");// Usa um caminho dinâmico, onde busca software pela pasta raiz do projeto
 
         /*--------EXECUÇÃO--------*/
 
@@ -110,15 +110,11 @@ public class TesteCampoTreinamento {
         Assert.assertEquals("Superior",combo.getFirstSelectedOption().getText());
 
 
-        driver.quit(); //fechar browser ap&oacute;s os testes
+        //driver.quit(); //fechar browser ap&oacute;s os testes
     }
 
     @Test
     public void DeveVerificarValoresCombo() {
-        /*-----PREPARAÇÃO-----*/
-        WebDriver driver = new FirefoxDriver(); //instanciar o driver do FIREFOX
-        driver.manage().window().setSize(new Dimension(1250, 765));//Abre a tela de acordo com essa dimensão
-        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");// Usa um caminho dinâmico, onde busca software pela pasta raiz do projeto
 
         /*--------EXECUÇÃO--------*/
 
@@ -141,16 +137,12 @@ public class TesteCampoTreinamento {
         }
         Assert.assertTrue(encontrou);
 
-        driver.quit();
+        //driver.quit();
 
 
     }// Fim da DeveVerificarValoresComboBox
     @Test
     public void DeveVerificarValoresComboMultiplo() {
-        /*-----PREPARAÇÃO-----*/
-        WebDriver driver = new FirefoxDriver(); //instanciar o driver do FIREFOX
-        driver.manage().window().setSize(new Dimension(1250, 765));//Abre a tela de acordo com essa dimensão
-        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");// Usa um caminho dinâmico, onde busca software pela pasta raiz do projeto
 
         /*--------EXECUÇÃO--------*/
 
@@ -173,23 +165,19 @@ public class TesteCampoTreinamento {
         combo.deselectByVisibleText("Corrida");
         allSelectedOptions = combo.getAllSelectedOptions();
         Assert.assertEquals(2,allSelectedOptions.size()); // valida se foi selecionado os 2 itens do combo
-        driver.quit();
+        //driver.quit();
 
     }
 
     @Test
     public void deveInteragirComBotoes() {
-        /*-----PREPARAÇÃO-----*/
-        WebDriver driver = new FirefoxDriver(); //instanciar o driver do FIREFOX
-        driver.manage().window().setSize(new Dimension(1250, 765));//Abre a tela de acordo com essa dimensão
-        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");// Usa um caminho dinâmico, onde busca software pela pasta raiz do projeto
 
         WebElement botao= driver.findElement(By.id("buttonSimple"));
 
         botao.click();
         Assert.assertEquals("Obrigado!",botao.getAttribute("value"));
 
-        driver.quit();
+        //driver.quit();
 
 
 
@@ -197,25 +185,17 @@ public class TesteCampoTreinamento {
     @Test
     @Ignore //Não execute assert
     public void deveInteragirComLinks() {
-        /*-----PREPARAÇÃO-----*/
-        WebDriver driver = new FirefoxDriver(); //instanciar o driver do FIREFOX
-        driver.manage().window().setSize(new Dimension(1250, 765));//Abre a tela de acordo com essa dimensão
-        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");// Usa um caminho dinâmico, onde busca software pela pasta raiz do projeto
 
        driver.findElement(By.linkText("Voltar")).click();
 
        Assert.assertEquals("Voltou!",driver.findElement(By.id("resultado")).getText());
 
-        driver.quit();
+        //driver.quit();
 
     }
 
     @Test
     public void deveBuscarTextoNaPágina() {
-        /*-----PREPARAÇÃO-----*/
-        WebDriver driver = new FirefoxDriver(); //instanciar o driver do FIREFOX
-        driver.manage().window().setSize(new Dimension(1250, 765));//Abre a tela de acordo com essa dimensão
-        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");// Usa um caminho dinâmico, onde busca software pela pasta raiz do projeto
 
         /**Opção tipo true para campo de texto não é ideal. Pois ela seleciona a primeira que aparecer*/
         //Assert.assertTrue(driver.findElement(By.tagName("body"))
@@ -230,7 +210,7 @@ public class TesteCampoTreinamento {
         Assert.assertEquals("Cuidado onde clica, muitas armadilhas...",driver.findElement(By.className("facilAchar"))
                 .getText());
 
-        driver.quit();
+        //driver.quit();
 
     }
 
