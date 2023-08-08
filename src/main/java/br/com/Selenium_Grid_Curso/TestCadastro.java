@@ -50,4 +50,23 @@ public class TestCadastro {
         //fechar browser após executar os testes
         driver.quit();
     }
-}
+
+
+    /**Validar as regras de negócios*/
+    @Test
+    public void deveValidarNomeObrigatorio() {
+
+        /*-----PREPARAÇÃO-----*/
+        WebDriver driver = new FirefoxDriver(); //instanciar o driver do FIREFOX
+        driver.manage().window().setSize(new Dimension(1250, 765));//Abre a tela de acordo com essa dimensão
+        driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");// Usa um caminho dinâmico, onde busca software pela pasta raiz do projeto
+
+        /**Preenchendo Formulário*/
+
+
+        //fechar browser após executar os testes
+        driver.quit();
+    }
+
+
+}// Fim da class
