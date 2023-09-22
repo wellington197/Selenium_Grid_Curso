@@ -15,15 +15,13 @@ public class TesteCampoTreinamento {
 
     /**Instanciando uma variável global*/
     private WebDriver driver;
-
+    private DSL dsl;
 
     @Before
     public void inicializa(){
 
         //Caso não tenha configurado nas variáveis de ambiente, terá de colocar o caminho
         //System.setProperty("webdriver.gecko.driver", "/xampp/htdocs/CURSOS_WELLINGTON/CURSOS_UDEMY/Drivers/geckodriver.exe");
-
-
         /*-----Prepara Cenário necessário para executar os testes-----*/
 
         /*INSTANCIAR OS DRIVERS*/
@@ -40,6 +38,9 @@ public class TesteCampoTreinamento {
         driver.get("file:///"+System.getProperty("user.dir")+"/src/main/resources/componentes.html");
         //System.out.println(driver.getTitle());
 
+        /*Iniciar a DSL*/
+        dsl = new DSL(driver);
+
     }
 
 
@@ -51,49 +52,91 @@ public class TesteCampoTreinamento {
     @Test
     public void testeTextField() {
 
+        /*Padrão DSL*/
+        dsl.escreve("elementosForm:sobrenome","Teste de inserção de texto");
+        Assert.assertEquals("Teste de inserção de texto",
+                dsl.obterValorCampo("elementosForm:sobrenome"));
 
+        /*Padrão sem reuso
         //Interagindo com campo de tipo texto
         driver.findElement(By.id("elementosForm:sobrenome")).sendKeys("Teste de inserção de texto");
         //Pegar o texto do campo para validar
-        Assert.assertEquals("Teste de inserção de texto", driver.findElement(By.id("elementosForm:sobrenome")).getAttribute("value"));
-        /*--------Verificação--------*/
-        //Assert.assertEquals("Google",driver.getTitle());
+        //--------Verificação--------
+        Assert.assertEquals("Google",driver.getTitle());
 
         //fechar browser ap&oacute;s os testes
-        //driver.quit();
+        driver.quit();
+
+        */
     }
     @Test
     public void InteracaoComTextArea() {
+        dsl.escreve("elementosForm:sugestoes","Teste de inserção de texto\n\nTeste de pular linha no campo");
+        Assert.assertEquals("Teste de inserção de texto\n\nTeste de pular linha no campo",
+                dsl.obterValorCampo("elementosForm:sugestoes"));
 
-        /*--------EXECUÇÃO--------*/
+        /* Padrão sem reuso
 
+        //EXECUÇÃO
         //Interagindo com campo de tipo texto
         driver.findElement(By.id("elementosForm:sugestoes")).sendKeys("Teste de inserção de texto\n\nTeste de pular linha no campo");
 
 
-        /*--------VERIFICAÇÃO--------*/
+        //VERIFICAÇÃo
         Assert.assertEquals("Teste de inserção de texto\n\nTeste de pular linha no campo", driver.findElement(By.id("elementosForm:sugestoes")).getAttribute("value"));
 
         //fechar browser ap&oacute;s os testes
         //driver.quit();
+
+         */
     }
     @Test
     public void DeveInteragirComRadioButton() {
 
-        /*--------EXECUÇÃO--------*/
+        dsl.clicaRadio("elementosForm:sexo:0");
+        dsl.isRadioMarcado("elementosForm:sexo:0");
+
+        /* Padrão sem reuso
+        //--------EXECUÇÃO--------/
 
         //Interagindo com campo de tipo texto
         driver.findElement(By.id("elementosForm:sexo:0")).click(); // Faz o clique no Radio Button
 
 
-        /*--------VERIFICAÇÃO--------*/
+        //--------VERIFICAÇÃO--------/
         Assert.assertTrue(driver.findElement(By.id("elementosForm:sexo:0")).isSelected()); //Verifica se está selecionado
 
         //fechar browser ap&oacute;s os testes
         //driver.quit();
+        */
+    }
+
+    @Test
+    public void DeveInteragirComCheckbox() {
+
+        dsl.clicaRadio("elementosForm:comidaFavorita:2");
+        dsl.isRadioMarcado("elementosForm:comidaFavorita:2");
+
+        /* Padrão sem reuso
+        //EXECUÇÃO
+        //Interagindo com campo de tipo texto
+        driver.findElement(By.id("elementosForm:comidaFavorita:2")).click(); // Faz o clique no Radio Button
+
+        //-VERIFICAÇÃO
+        Assert.assertTrue(driver.findElement(By.id("elementosForm:comidaFavorita:2")).isSelected()); //Verifica se está selecionado
+
+        //fechar browser ap&oacute;s os testes
+        //driver.quit();
+
+         */
     }
     @Test
     public void DeveInteragirComComboBox() {
+
+
+
+
+
 
         /*--------EXECUÇÃO--------*/
 
