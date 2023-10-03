@@ -21,7 +21,7 @@ public class DSL {
 
    public void escreve(String id_campo,String texto){
        driver.findElement(By.id(id_campo)).sendKeys(texto);
-   }// fim do método escreve
+   }// fim do método escreve da DSl
     public String obterValorCampo(String id_campo) {
         return driver.findElement(By.id(id_campo)).getAttribute("value");
     }
