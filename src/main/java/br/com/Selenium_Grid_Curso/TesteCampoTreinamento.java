@@ -15,6 +15,7 @@ public class TesteCampoTreinamento {
 
     /**Instanciando uma variável global*/
     private WebDriver driver;
+    private DSL dsl;
 
 
     @Before
@@ -33,7 +34,7 @@ public class TesteCampoTreinamento {
         //WebDriver driver=new InternetExplorerDriver(); //instanciar o driver do IE
 
         //Abre a tela de acordo com essa dimensão
-        driver.manage().window().setSize(new Dimension(1250,765));
+        driver.manage().window().setSize(new Dimension(960,765));
 
         //Acesso ao site pelo protocolo
         // Usa um caminho dinâmico, onde busca software pela pasta raiz do projeto
@@ -50,8 +51,13 @@ public class TesteCampoTreinamento {
 
     @Test
     public void testeTextField() {
+        /**Chamando a DSL*/
 
+        /*
+        dsl.escreve("elementosForm:nome","Teste de escrita" );
+        Assert.assertEquals("Teste de inserção de texto", dsl.obterValorCampo("elementosForm:nome"));
 
+         Modelo antigo*/
         //Interagindo com campo de tipo texto
         driver.findElement(By.id("elementosForm:sobrenome")).sendKeys("Teste de inserção de texto");
         //Pegar o texto do campo para validar
@@ -61,9 +67,15 @@ public class TesteCampoTreinamento {
 
         //fechar browser ap&oacute;s os testes
         //driver.quit();
+
+
+
     }
     @Test
     public void InteracaoComTextArea() {
+
+
+
 
         /*--------EXECUÇÃO--------*/
 
