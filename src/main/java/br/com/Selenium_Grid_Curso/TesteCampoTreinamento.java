@@ -17,14 +17,12 @@ public class TesteCampoTreinamento {
     private WebDriver driver;
     private DSL dsl;
 
-
     @Before
+    /**Inicia o drive*/
     public void inicializa(){
 
         //Caso não tenha configurado nas variáveis de ambiente, terá de colocar o caminho
         //System.setProperty("webdriver.gecko.driver", "/xampp/htdocs/CURSOS_WELLINGTON/CURSOS_UDEMY/Drivers/geckodriver.exe");
-
-
         /*-----Prepara Cenário necessário para executar os testes-----*/
 
         /*INSTANCIAR OS DRIVERS*/
@@ -41,88 +39,123 @@ public class TesteCampoTreinamento {
         driver.get("file:///"+System.getProperty("user.dir")+"/src/main/resources/componentes.html");
         //System.out.println(driver.getTitle());
 
+        /*Iniciar a DSL*/
+        dsl = new DSL(driver);
+
     }
-
-
     @After
+    /**Fechar o drive*/
     public void finalizar(){
+
         driver.quit();
     }
 
     @Test
     public void testeTextField() {
-        /**Chamando a DSL*/
+        /**Padrão DSL*/
+        dsl.escreve("elementosForm:sobrenome","Teste de inserção de texto");
+        Assert.assertEquals("Teste de inserção de texto",
+                dsl.obterValorCampo("elementosForm:sobrenome"));
 
-        /*
-        dsl.escreve("elementosForm:nome","Teste de escrita" );
-        Assert.assertEquals("Teste de inserção de texto", dsl.obterValorCampo("elementosForm:nome"));
+        /**Padrão sem reuso
 
-         Modelo antigo*/
+
         //Interagindo com campo de tipo texto
         driver.findElement(By.id("elementosForm:sobrenome")).sendKeys("Teste de inserção de texto");
         //Pegar o texto do campo para validar
-        Assert.assertEquals("Teste de inserção de texto", driver.findElement(By.id("elementosForm:sobrenome")).getAttribute("value"));
-        /*--------Verificação--------*/
-        //Assert.assertEquals("Google",driver.getTitle());
+        //--------Verificação--------
+        Assert.assertEquals("Google",driver.getTitle());
 
         //fechar browser ap&oacute;s os testes
-        //driver.quit();
+        driver.quit();
 
-
-
+        */
     }
     @Test
     public void InteracaoComTextArea() {
+        dsl.escreve("elementosForm:sugestoes","Teste de inserção de texto\n\nTeste de pular linha no campo");
+        Assert.assertEquals("Teste de inserção de texto\n\nTeste de pular linha no campo",dsl.obterValorCampo("elementosForm:sugestoes"));
 
 
+        /** Padrão sem reuso
 
-
-        /*--------EXECUÇÃO--------*/
-
+        //EXECUÇÃO
         //Interagindo com campo de tipo texto
         driver.findElement(By.id("elementosForm:sugestoes")).sendKeys("Teste de inserção de texto\n\nTeste de pular linha no campo");
 
 
-        /*--------VERIFICAÇÃO--------*/
+        //VERIFICAÇÃo
         Assert.assertEquals("Teste de inserção de texto\n\nTeste de pular linha no campo", driver.findElement(By.id("elementosForm:sugestoes")).getAttribute("value"));
 
         //fechar browser ap&oacute;s os testes
         //driver.quit();
+
+         */
     }
     @Test
     public void DeveInteragirComRadioButton() {
+       dsl.clicaRadio("elementosForm:sexo:0");
+        Assert.assertTrue(driver.findElement(By.id("elementosForm:sexo:0")).isSelected());
 
-        /*--------EXECUÇÃO--------*/
+        /**Padrão sem reuso
+        //--------EXECUÇÃO--------/
 
         //Interagindo com campo de tipo texto
         driver.findElement(By.id("elementosForm:sexo:0")).click(); // Faz o clique no Radio Button
 
 
-        /*--------VERIFICAÇÃO--------*/
+        //--------VERIFICAÇÃO--------/
         Assert.assertTrue(driver.findElement(By.id("elementosForm:sexo:0")).isSelected()); //Verifica se está selecionado
 
         //fechar browser ap&oacute;s os testes
         //driver.quit();
+        */
+    }
+
+    @Test
+    public void DeveInteragirComCheckbox() {
+        dsl.clicaRadio("elementosForm:comidaFavorita:2");
+        dsl.isRadioMarcado("elementosForm:comidaFavorita:2");
+
+        /** Padrão sem reuso
+         *
+        //EXECUÇÃO
+        //Interagindo com campo de tipo texto
+        driver.findElement(By.id("elementosForm:comidaFavorita:2")).click(); // Faz o clique no Radio Button
+
+        //-VERIFICAÇÃO
+        Assert.assertTrue(driver.findElement(By.id("elementosForm:comidaFavorita:2")).isSelected()); //Verifica se está selecionado
+
+        //fechar browser ap&oacute;s os testes
+        //driver.quit();
+
+         */
     }
     @Test
     public void DeveInteragirComComboBox() {
 
-        /*--------EXECUÇÃO--------*/
-
-        //Buscar os elementos
-        WebElement element = driver.findElement(By.id("elementosForm:escolaridade"));
-        Select combo = new Select(element); //Seleciono um elemento
-
-        //combo.selectByIndex(5); //Seleciona o elemento 3
-        combo.selectByValue("superior"); // Seleciona pelo valor
-        //combo.selectByVisibleText("Superior"); // (IDEAL) Valida se valor do campo é mesmo que usuário visualiza
 
 
-        /*--------VERIFICAÇÃO--------*/
-        Assert.assertEquals("Superior",combo.getFirstSelectedOption().getText());
+        /** Padrão sem reuso
+
+            //--------EXECUÇÃO--------
+
+            //Buscar os elementos
+            WebElement element = driver.findElement(By.id("elementosForm:escolaridade"));
+            Select combo = new Select(element); //Seleciono um elemento
+
+            //combo.selectByIndex(5); //Seleciona o elemento 3
+            combo.selectByValue("superior"); // Seleciona pelo valor
+            //combo.selectByVisibleText("Superior"); // (IDEAL) Valida se valor do campo é mesmo que usuário visualiza
 
 
-        //driver.quit(); //fechar browser ap&oacute;s os testes
+            //--------VERIFICAÇÃO--------
+            Assert.assertEquals("Superior",combo.getFirstSelectedOption().getText());
+
+
+            //driver.quit(); //fechar browser ap&oacute;s os testes
+
+        */
     }
 
     @Test

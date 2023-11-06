@@ -1,0 +1,30 @@
+name: Testes de Selenium
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout do código-fonte
+      uses: actions/checkout@v2
+
+    - name: Configurar ambiente
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y openjdk-11-jdk
+        wget -N https://chromedriver.storage.googleapis.com/LATEST_RELEASE
+        LATEST_CHROMEDRIVER=$(cat LATEST_RELEASE)
+        wget https://chromedriver.storage.googleapis.com/$LATEST_CHROMEDRIVER/chromedriver_linux64.zip
+        unzip chromedriver_linux64.zip
+        chmod +x chromedriver
+        sudo mv chromedriver /usr/local/bin/
+        sudo apt-get install -y libglib2.0-0 libnss3 libgconf-2-4
+
+    - name: Build com Maven
+    
+  
