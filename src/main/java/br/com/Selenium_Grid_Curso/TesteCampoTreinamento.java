@@ -18,6 +18,7 @@ public class TesteCampoTreinamento {
     private DSL dsl;
 
     @Before
+    /**Inicia o drive*/
     public void inicializa(){
 
         //Caso não tenha configurado nas variáveis de ambiente, terá de colocar o caminho
@@ -31,7 +32,7 @@ public class TesteCampoTreinamento {
         //WebDriver driver=new InternetExplorerDriver(); //instanciar o driver do IE
 
         //Abre a tela de acordo com essa dimensão
-        driver.manage().window().setSize(new Dimension(1250,765));
+        driver.manage().window().setSize(new Dimension(960,765));
 
         //Acesso ao site pelo protocolo
         // Usa um caminho dinâmico, onde busca software pela pasta raiz do projeto
@@ -42,22 +43,23 @@ public class TesteCampoTreinamento {
         dsl = new DSL(driver);
 
     }
-
-
     @After
+    /**Fechar o drive*/
     public void finalizar(){
+
         driver.quit();
     }
 
     @Test
     public void testeTextField() {
-
-        /*Padrão DSL*/
+        /**Padrão DSL*/
         dsl.escreve("elementosForm:sobrenome","Teste de inserção de texto");
         Assert.assertEquals("Teste de inserção de texto",
                 dsl.obterValorCampo("elementosForm:sobrenome"));
 
-        /*Padrão sem reuso
+        /**Padrão sem reuso
+
+
         //Interagindo com campo de tipo texto
         driver.findElement(By.id("elementosForm:sobrenome")).sendKeys("Teste de inserção de texto");
         //Pegar o texto do campo para validar
@@ -72,10 +74,10 @@ public class TesteCampoTreinamento {
     @Test
     public void InteracaoComTextArea() {
         dsl.escreve("elementosForm:sugestoes","Teste de inserção de texto\n\nTeste de pular linha no campo");
-        Assert.assertEquals("Teste de inserção de texto\n\nTeste de pular linha no campo",
-                dsl.obterValorCampo("elementosForm:sugestoes"));
+        Assert.assertEquals("Teste de inserção de texto\n\nTeste de pular linha no campo",dsl.obterValorCampo("elementosForm:sugestoes"));
 
-        /* Padrão sem reuso
+
+        /** Padrão sem reuso
 
         //EXECUÇÃO
         //Interagindo com campo de tipo texto
@@ -92,11 +94,10 @@ public class TesteCampoTreinamento {
     }
     @Test
     public void DeveInteragirComRadioButton() {
+       dsl.clicaRadio("elementosForm:sexo:0");
+        Assert.assertTrue(driver.findElement(By.id("elementosForm:sexo:0")).isSelected());
 
-        dsl.clicaRadio("elementosForm:sexo:0");
-        dsl.isRadioMarcado("elementosForm:sexo:0");
-
-        /* Padrão sem reuso
+        /**Padrão sem reuso
         //--------EXECUÇÃO--------/
 
         //Interagindo com campo de tipo texto
@@ -113,11 +114,11 @@ public class TesteCampoTreinamento {
 
     @Test
     public void DeveInteragirComCheckbox() {
-
         dsl.clicaRadio("elementosForm:comidaFavorita:2");
         dsl.isRadioMarcado("elementosForm:comidaFavorita:2");
 
-        /* Padrão sem reuso
+        /** Padrão sem reuso
+         *
         //EXECUÇÃO
         //Interagindo com campo de tipo texto
         driver.findElement(By.id("elementosForm:comidaFavorita:2")).click(); // Faz o clique no Radio Button
@@ -135,25 +136,26 @@ public class TesteCampoTreinamento {
 
 
 
+        /** Padrão sem reuso
+
+            //--------EXECUÇÃO--------
+
+            //Buscar os elementos
+            WebElement element = driver.findElement(By.id("elementosForm:escolaridade"));
+            Select combo = new Select(element); //Seleciono um elemento
+
+            //combo.selectByIndex(5); //Seleciona o elemento 3
+            combo.selectByValue("superior"); // Seleciona pelo valor
+            //combo.selectByVisibleText("Superior"); // (IDEAL) Valida se valor do campo é mesmo que usuário visualiza
 
 
-
-        /*--------EXECUÇÃO--------*/
-
-        //Buscar os elementos
-        WebElement element = driver.findElement(By.id("elementosForm:escolaridade"));
-        Select combo = new Select(element); //Seleciono um elemento
-
-        //combo.selectByIndex(5); //Seleciona o elemento 3
-        combo.selectByValue("superior"); // Seleciona pelo valor
-        //combo.selectByVisibleText("Superior"); // (IDEAL) Valida se valor do campo é mesmo que usuário visualiza
+            //--------VERIFICAÇÃO--------
+            Assert.assertEquals("Superior",combo.getFirstSelectedOption().getText());
 
 
-        /*--------VERIFICAÇÃO--------*/
-        Assert.assertEquals("Superior",combo.getFirstSelectedOption().getText());
+            //driver.quit(); //fechar browser ap&oacute;s os testes
 
-
-        //driver.quit(); //fechar browser ap&oacute;s os testes
+        */
     }
 
     @Test
