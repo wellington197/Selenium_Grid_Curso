@@ -52,12 +52,12 @@ public class TesteCampoTreinamento {
 
     @Test
     public void testeTextField() {
-        /**Padrão DSL*/
+        /**Padrão DSL
         dsl.escreve("elementosForm:sobrenome","Teste de inserção de texto");
         Assert.assertEquals("Teste de inserção de texto",
                 dsl.obterValorCampo("elementosForm:sobrenome"));
 
-        /**Padrão sem reuso
+        /**Padrão sem reuso*/
 
 
         //Interagindo com campo de tipo texto
@@ -69,7 +69,7 @@ public class TesteCampoTreinamento {
         //fechar browser ap&oacute;s os testes
         driver.quit();
 
-        */
+
     }
     @Test
     public void InteracaoComTextArea() {
