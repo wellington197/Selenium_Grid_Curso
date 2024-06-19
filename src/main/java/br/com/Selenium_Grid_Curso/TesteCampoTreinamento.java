@@ -66,8 +66,8 @@ public class TesteCampoTreinamento {
         //--------Verificação--------
         Assert.assertEquals("Google",driver.getTitle());
 
-        //fechar browser ap&oacute;s os testes
-        driver.quit();
+        driver.quit(); //fechar browser ap&oacute;s os testes
+
 
 
     }

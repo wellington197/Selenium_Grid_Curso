@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.Select;
 
 /** Classe java, que reutiliza métodos que usam a mesma execuçaõ de teste*/
 
+
 public class DSL {
 
     /**Instanciando uma variável global*/
